@@ -7,1023 +7,650 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* ── Reset & Base ─────────────────────────────── */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --ink:#17171a;--mid:#54545c;--pale:#95959e;--faint:#c8c6be;
-  --bg:#f4f2ec;--card:#ffffff;--card2:#faf9f6;
-  --border:#e0ddd4;--border2:#eceae2;
-
+  --ink:#17171a;--mid:#54545c;--pale:#95959e;--faint:#d0cec6;
+  --bg:#f4f2ec;--card:#fff;--card2:#faf9f6;--border:#e0ddd4;--border2:#eceae2;
   --g:#1a9e72;--gl:#e3f5ed;--gd:#0d6b4c;
   --b:#1a5fa0;--bl:#ddeaf8;--bd:#0d3f6e;
   --a:#b87010;--al:#faead4;--ad:#7a4a08;
   --p:#4f44b8;--pl:#eceafe;--pd:#342e80;
   --r:#9c3018;--rl:#faece6;--rd:#6a1f0e;
   --pk:#963050;--pkl:#fde6ee;--pkd:#642038;
-
-  --fnt-serif:'Noto Serif JP',serif;
-  --fnt-sans:'Noto Sans JP',sans-serif;
-  --r4:4px;--r8:8px;--r12:12px;--r20:20px;
+  --teal:#0e8080;--teall:#d0efef;--teald:#085858;
 }
-html{scroll-behavior:smooth;font-size:15px}
-body{background:var(--bg);color:var(--ink);font-family:var(--fnt-sans);font-weight:300;line-height:1.7}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans JP',sans-serif;font-weight:300;line-height:1.7;font-size:15px}
 a{color:var(--b);text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* ── Layout ────────────────────────────────────── */
-.wrap{max-width:820px;margin:0 auto;padding:0 20px}
-
-/* ── Cover ─────────────────────────────────────── */
-.cover{
-  background:var(--ink);
-  color:#fff;
-  padding:56px 0 48px;
-  position:relative;
-  overflow:hidden;
-}
-.cover::before{
-  content:'';position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 55% 70% at 85% 40%,rgba(26,158,114,.14) 0%,transparent 65%),
-    radial-gradient(ellipse 40% 50% at 5% 80%, rgba(26,95,160,.12) 0%,transparent 60%);
-}
-.cover-inner{position:relative;max-width:820px;margin:0 auto;padding:0 32px}
-.cover-eyebrow{
-  font-size:10px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--g);border:1px solid rgba(26,158,114,.4);
-  border-radius:20px;padding:3px 12px;display:inline-block;margin-bottom:16px;
-  font-weight:400;
-}
-.cover h1{
-  font-family:var(--fnt-serif);font-size:clamp(30px,6vw,48px);
-  font-weight:700;line-height:1.15;letter-spacing:-0.5px;margin-bottom:8px;
-}
+/* ── Cover ── */
+.cover{background:var(--ink);color:#fff;padding:52px 0 44px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 80% 40%,rgba(26,158,114,.13) 0%,transparent 65%),
+             radial-gradient(ellipse 40% 55% at 5% 75%,rgba(26,95,160,.11) 0%,transparent 60%)}
+.cover-in{position:relative;max-width:800px;margin:0 auto;padding:0 28px}
+.eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--g);border:1px solid rgba(26,158,114,.4);border-radius:20px;padding:3px 12px;display:inline-block;margin-bottom:14px;font-weight:400}
+.cover h1{font-family:'Noto Serif JP',serif;font-size:clamp(28px,6vw,46px);font-weight:700;line-height:1.15;letter-spacing:-0.5px;margin-bottom:6px}
 .cover h1 em{color:var(--g);font-style:normal}
-.cover-sub{font-size:13px;color:rgba(255,255,255,.55);margin-top:6px}
+.cover-meta{font-size:12px;color:rgba(255,255,255,.5);margin-top:6px}
+.badges{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.badge{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05)}
+.bl{font-size:10px;font-weight:500;padding:2px 9px;border-radius:20px}
+.bl-a{background:var(--al);color:var(--ad)}
+.bl-b{background:var(--bl);color:var(--bd)}
+.badge span:last-child{font-size:13px;color:rgba(255,255,255,.8)}
 
-.plan-badges{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
-.plan-badge{
-  display:flex;align-items:center;gap:8px;
-  padding:8px 16px;border-radius:var(--r12);border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.06);
-}
-.plan-badge .badge-label{
-  font-size:10px;font-weight:500;padding:2px 9px;border-radius:20px;letter-spacing:.5px;
-}
-.badge-a{background:var(--gl);color:var(--gd)}
-.badge-b{background:var(--bl);color:var(--bd)}
-.plan-badge span:last-child{font-size:13px;color:rgba(255,255,255,.8)}
+/* ── Tabs ── */
+.tabs{display:flex;border-bottom:2px solid var(--border);position:sticky;top:0;z-index:50;background:var(--bg)}
+.tab{flex:1;padding:14px 0;text-align:center;font-size:13px;font-weight:500;color:var(--pale);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .2s,border-color .2s}
+.tab:hover{color:var(--mid)}
+.tab.on-a{color:var(--a);border-color:var(--a)}
+.tab.on-b{color:var(--b);border-color:var(--b)}
 
-/* ── Plan tabs ──────────────────────────────────── */
-.plan-tabs{
-  display:flex;gap:0;border-bottom:2px solid var(--border);
-  position:sticky;top:0;z-index:50;background:var(--bg);
-}
-.plan-tab{
-  flex:1;padding:14px 0;text-align:center;font-size:13px;font-weight:500;
-  color:var(--pale);cursor:pointer;border-bottom:2px solid transparent;
-  margin-bottom:-2px;transition:color .2s,border-color .2s;user-select:none;
-}
-.plan-tab.active-a{color:var(--g);border-color:var(--g)}
-.plan-tab.active-b{color:var(--b);border-color:var(--b)}
-.plan-tab:hover{color:var(--mid)}
+/* ── Plan sections ── */
+.plan{display:none}.plan.show{display:block}
 
-.plan-section{display:none}
-.plan-section.active{display:block}
+/* ── Timeline ── */
+.tl{max-width:800px;margin:0 auto;padding:32px 20px 56px;position:relative}
+.tl::before{content:'';position:absolute;left:42px;top:44px;bottom:24px;width:2px;background:var(--border)}
 
-/* ── Timeline ───────────────────────────────────── */
-.tl{padding:32px 0 48px;position:relative}
-.tl::before{
-  content:'';position:absolute;
-  left:22px;top:40px;bottom:20px;width:2px;
-  background:var(--border);
-}
+/* Stop */
+.stop{display:grid;grid-template-columns:60px 1fr;gap:0 16px;margin-bottom:0}
+.s-left{display:flex;flex-direction:column;align-items:center;padding-top:2px}
+.s-time{font-size:10px;font-weight:500;color:var(--pale);letter-spacing:.4px;margin-bottom:5px;white-space:nowrap;text-align:center}
+.s-dot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;position:relative;z-index:1;flex-shrink:0}
+.s-body{padding-bottom:0}
 
-/* row = stop or transit */
-.tl-row{display:grid;grid-template-columns:44px 1fr;gap:0 18px;position:relative}
-
-/* ── Stop ───────────────────────────────────────── */
-.stop-dot{
-  width:44px;display:flex;flex-direction:column;align-items:center;
-  padding-top:2px;
-}
-.stop-dot .time{font-size:10px;font-weight:500;color:var(--pale);letter-spacing:.4px;margin-bottom:5px;white-space:nowrap}
-.dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;position:relative;z-index:1}
-
-.stop-body{padding-bottom:0}
-
-.stop-card{
-  background:var(--card);border:1px solid var(--border);
-  border-radius:var(--r12);overflow:hidden;
-  transition:box-shadow .2s,transform .2s;
-}
-.stop-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.08);transform:translateY(-1px)}
-
-.card-head{padding:14px 18px 10px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-.card-title{font-family:var(--fnt-serif);font-size:16px;font-weight:700;color:var(--ink);line-height:1.3}
-.time-range{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px}
-.card-body{padding:0 18px 14px}
-.card-desc{font-size:13px;color:var(--mid);line-height:1.7;margin-bottom:8px}
-.card-sub{font-size:12px;color:var(--pale);line-height:1.6;margin-bottom:10px}
+/* Card */
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:4px;transition:box-shadow .2s,transform .2s}
+.card:hover{box-shadow:0 4px 20px rgba(0,0,0,.08);transform:translateY(-1px)}
+.card-h{padding:14px 18px 10px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.card-title{font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700;color:var(--ink);line-height:1.3}
+.tr-badge{font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.card-b{padding:0 18px 14px}
+.desc{font-size:13px;color:var(--mid);line-height:1.7;margin-bottom:6px}
+.sub{font-size:12px;color:var(--pale);line-height:1.6;margin-bottom:8px}
 
 /* Tags */
-.tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
 .tag{font-size:10.5px;font-weight:500;padding:3px 9px;border-radius:20px}
 
-/* Warn box */
-.warn{
-  background:var(--al);border-left:3px solid var(--a);
-  border-radius:0 var(--r4) var(--r4) 0;
-  padding:8px 12px;font-size:12px;color:var(--ad);
-  line-height:1.6;margin-bottom:10px;
-}
+/* Warn */
+.warn{background:var(--al);border-left:3px solid var(--a);border-radius:0 4px 4px 0;padding:8px 12px;font-size:12px;color:var(--ad);line-height:1.6;margin-bottom:8px}
 
 /* Bus table */
-.bus-table-wrap{
-  background:var(--card2);border:1px solid var(--border2);
-  border-radius:var(--r8);overflow:hidden;margin-bottom:10px;
-}
-.bus-table-head{padding:10px 14px 6px;border-bottom:1px solid var(--border2)}
-.bus-table-title{font-size:12px;font-weight:500;color:var(--ink)}
-.bus-table-sub{font-size:11px;color:var(--pale)}
-.bus-rows{padding:6px 0}
-.bus-row{
-  display:grid;grid-template-columns:90px 90px 1fr;
-  gap:6px;align-items:center;padding:5px 14px;font-size:12px;
-}
-.bus-row.hi{background:var(--bl);border-radius:var(--r4);margin:2px 6px}
-.bus-row .dep{font-weight:700;font-size:13px;color:var(--ink);font-variant-numeric:tabular-nums}
-.bus-row .arr{color:var(--mid)}
-.bus-row .note{color:var(--pale);font-size:11px}
-.bus-row.hi .note{color:var(--b);font-weight:500}
+.btw{background:var(--card2);border:1px solid var(--border2);border-radius:8px;overflow:hidden;margin-bottom:8px}
+.bth{padding:10px 14px 6px;border-bottom:1px solid var(--border2)}
+.bth-title{font-size:12px;font-weight:500;color:var(--ink)}
+.bth-sub{font-size:11px;color:var(--pale)}
+.brows{padding:6px 0}
+.brow{display:grid;grid-template-columns:90px 90px 1fr;gap:6px;align-items:center;padding:5px 14px;font-size:12px}
+.brow.hi{background:var(--bl);border-radius:4px;margin:2px 6px}
+.brow .dep{font-weight:700;font-size:13px;color:var(--ink)}
+.brow .arr{color:var(--mid)}
+.brow .note{color:var(--pale);font-size:11px}
+.brow.hi .note{color:var(--b);font-weight:500}
 
 /* URLs */
-.url-list{border-top:1px solid var(--border2);padding:10px 18px 4px;display:flex;flex-direction:column;gap:5px}
-.url-item{display:flex;gap:8px;align-items:baseline;font-size:12px}
-.url-label{font-size:10px;color:var(--pale);font-weight:500;min-width:54px;letter-spacing:.3px}
-.url-item a{color:var(--b);font-size:11px;word-break:break-all}
+.urls{border-top:1px solid var(--border2);padding:10px 18px 6px;display:flex;flex-direction:column;gap:5px}
+.url-row{display:flex;gap:8px;align-items:baseline}
+.url-lbl{font-size:10px;color:var(--pale);font-weight:500;min-width:56px;letter-spacing:.3px;flex-shrink:0}
+.url-row a{font-size:11px;color:var(--b);word-break:break-all}
 
-/* ── Transit row ─────────────────────────────────── */
-.transit-dot{
-  width:44px;display:flex;flex-direction:column;align-items:center;
-  padding:4px 0;
-}
-.transit-line{width:2px;flex:1;min-height:32px}
-.transit-icon{
-  width:20px;height:20px;border-radius:50%;
-  background:var(--bg);border:1.5px solid var(--faint);
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;z-index:1;position:relative;
-}
-.transit-body{
-  display:flex;align-items:center;gap:10px;
-  padding:6px 0;min-height:44px;
-}
-.transit-pill{
-  display:inline-flex;align-items:center;gap:5px;
-  font-size:11px;font-weight:500;
-  padding:5px 12px;border-radius:20px;
-  border:1px dashed var(--faint);color:var(--pale);
-}
-.transit-pill .dur{font-weight:700;color:var(--mid)}
-.transit-arrow{color:var(--faint);font-size:12px;margin-left:6px}
+/* Transit */
+.transit{display:grid;grid-template-columns:60px 1fr;gap:0 16px}
+.t-left{display:flex;flex-direction:column;align-items:center}
+.t-line{width:2px;flex:1;min-height:20px;background:var(--border)}
+.t-ico{width:22px;height:22px;border-radius:50%;background:var(--bg);border:1.5px solid var(--faint);display:flex;align-items:center;justify-content:center;font-size:11px;z-index:1;position:relative;flex-shrink:0}
+.t-body{display:flex;align-items:center;padding:6px 0;min-height:46px}
+.t-pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:400;padding:5px 12px;border-radius:20px;border:1px dashed var(--faint);color:var(--pale);flex-wrap:wrap}
+.t-pill strong{color:var(--mid);font-weight:500}
 
-/* ── URL Summary ─────────────────────────────────── */
-.url-summary{padding:40px 0 60px}
-.url-summary h2{font-family:var(--fnt-serif);font-size:20px;font-weight:700;margin-bottom:4px}
-.url-summary .s-sub{font-size:13px;color:var(--pale);margin-bottom:24px}
-.url-sec{margin-bottom:28px}
-.url-sec-title{
-  font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;
-  color:var(--pale);padding-bottom:6px;border-bottom:1px solid var(--border);
-  margin-bottom:12px;
-}
-.url-entry{
-  display:grid;grid-template-columns:140px 1fr;gap:6px;
-  padding:8px 12px;border-radius:var(--r8);font-size:12px;
-  background:var(--card);border:1px solid var(--border2);margin-bottom:5px;
-}
-.url-entry .ename{font-weight:500;color:var(--ink);align-self:center}
-.url-entry a{color:var(--b);word-break:break-all;font-size:11px}
+/* ── Color utils ── */
+.d-b{background:var(--b);color:#fff}.d-g{background:var(--g);color:#fff}
+.d-a{background:var(--a);color:#fff}.d-p{background:var(--p);color:#fff}
+.d-r{background:var(--r);color:#fff}.d-pk{background:var(--pk);color:#fff}
+.d-teal{background:var(--teal);color:#fff}
 
-.notice{
-  background:var(--gl);border-radius:var(--r8);
-  padding:14px 18px;font-size:12px;color:var(--gd);line-height:1.7;
-  margin-top:24px;
-}
+.tr-b{background:var(--bl);color:var(--bd)}.tr-g{background:var(--gl);color:var(--gd)}
+.tr-a{background:var(--al);color:var(--ad)}.tr-p{background:var(--pl);color:var(--pd)}
+.tr-r{background:var(--rl);color:var(--rd)}.tr-pk{background:var(--pkl);color:var(--pkd)}
+.tr-teal{background:var(--teall);color:var(--teald)}
 
-/* ── Color utils ─────────────────────────────────── */
-.dot-g{background:var(--g);color:#fff}
-.dot-b{background:var(--b);color:#fff}
-.dot-a{background:var(--a);color:#fff}
-.dot-p{background:var(--p);color:#fff}
-.dot-r{background:var(--r);color:#fff}
-.dot-pk{background:var(--pk);color:#fff}
-
-.tr-g{background:var(--gl);color:var(--gd)}
-.tr-b{background:var(--bl);color:var(--bd)}
-.tr-a{background:var(--al);color:var(--ad)}
-.tr-p{background:var(--pl);color:var(--pd)}
-.tr-r{background:var(--rl);color:var(--rd)}
-.tr-pk{background:var(--pkl);color:var(--pkd)}
-
-.tag-g{background:var(--gl);color:var(--gd)}
-.tag-b{background:var(--bl);color:var(--bd)}
-.tag-a{background:var(--al);color:var(--ad)}
-.tag-p{background:var(--pl);color:var(--pd)}
-.tag-r{background:var(--rl);color:var(--rd)}
-.tag-pk{background:var(--pkl);color:var(--pkd)}
+.tag-b{background:var(--bl);color:var(--bd)}.tag-g{background:var(--gl);color:var(--gd)}
+.tag-a{background:var(--al);color:var(--ad)}.tag-p{background:var(--pl);color:var(--pd)}
+.tag-r{background:var(--rl);color:var(--rd)}.tag-pk{background:var(--pkl);color:var(--pkd)}
+.tag-teal{background:var(--teall);color:var(--teald)}
 .tag-red{background:#ffebeb;color:#a03030}
 
-/* Stop color borders */
-.stop-card.col-g{border-left:3px solid var(--g)}
-.stop-card.col-b{border-left:3px solid var(--b)}
-.stop-card.col-a{border-left:3px solid var(--a)}
-.stop-card.col-p{border-left:3px solid var(--p)}
-.stop-card.col-r{border-left:3px solid var(--r)}
-.stop-card.col-pk{border-left:3px solid var(--pk)}
+/* border-left accent */
+.acc-b{border-left:3px solid var(--b)}.acc-g{border-left:3px solid var(--g)}
+.acc-a{border-left:3px solid var(--a)}.acc-p{border-left:3px solid var(--p)}
+.acc-r{border-left:3px solid var(--r)}.acc-pk{border-left:3px solid var(--pk)}
+.acc-teal{border-left:3px solid var(--teal)}
 
-/* ── Responsive ──────────────────────────────────── */
+/* ── Footer ── */
+.footer{background:var(--ink);color:rgba(255,255,255,.8);padding:40px 0 48px}
+.footer-in{max-width:800px;margin:0 auto;padding:0 28px}
+.f-eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--g);margin-bottom:8px;font-weight:500}
+.f-title{font-family:'Noto Serif JP',serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.f-sub{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:24px}
+.f-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px}
+.f-sec-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:10px}
+.f-entries{display:flex;flex-direction:column;gap:7px}
+.f-entry{background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px}
+.f-entry p{font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px}
+.f-entry a{font-size:10px;color:var(--g);word-break:break-all}
+.f-note{margin-top:20px;background:rgba(26,158,114,.1);border:1px solid rgba(26,158,114,.2);border-radius:8px;padding:14px 18px;font-size:12px;color:rgba(255,255,255,.55);line-height:1.7}
+
 @media(max-width:520px){
-  .tl::before{left:16px}
-  .tl-row{grid-template-columns:36px 1fr}
-  .stop-dot,.transit-dot{width:36px}
-  .bus-row{grid-template-columns:80px 80px 1fr}
-  .url-entry{grid-template-columns:1fr;gap:3px}
-  .cover h1{font-size:28px}
+  .tl::before{left:34px}
+  .stop,.transit{grid-template-columns:52px 1fr;gap:0 12px}
+  .brow{grid-template-columns:76px 76px 1fr}
+  .cover h1{font-size:26px}
 }
 </style>
 </head>
 <body>
 
-<!-- ── COVER ────────────────────────────────────────────────── -->
+<!-- ── COVER ── -->
 <div class="cover">
-  <div class="cover-inner">
-    <div class="cover-eyebrow">Day Trip Guide</div>
+  <div class="cover-in">
+    <div class="eyebrow">Day Trip Guide</div>
     <h1>奥多摩<em>日帰り</em>プラン</h1>
-    <p class="cover-sub">御茶ノ水発 ／ 2名 ／ ハイキング・鍾乳洞・温泉<br>バス時刻：西東京バス バスナビ.com 2026年4月21日現在</p>
-    <div class="plan-badges">
-      <div class="plan-badge">
-        <span class="badge-label badge-a">Plan A</span>
-        <span>鳩ノ巣渓谷コース</span>
-      </div>
-      <div class="plan-badge">
-        <span class="badge-label badge-b">Plan B</span>
-        <span>奥多摩湖コース</span>
-      </div>
+    <p class="cover-meta">御茶ノ水発 ／ 2名 ／ 途中下車ランチ → 日原鍾乳洞 → もえぎの湯</p>
+    <div class="badges">
+      <div class="badge"><span class="bl bl-a">Plan A</span><span>釜めし なかい（川井駅）コース</span></div>
+      <div class="badge"><span class="bl bl-b">Plan B</span><span>そば・うどん 丹三郎（古里駅）コース</span></div>
     </div>
   </div>
 </div>
 
-<!-- ── TABS ──────────────────────────────────────────────────── -->
-<div class="plan-tabs wrap" style="max-width:820px;margin:0 auto">
-  <div class="plan-tab active-a" onclick="switchPlan('a')">Plan A　鳩ノ巣渓谷コース</div>
-  <div class="plan-tab" id="tab-b" onclick="switchPlan('b')">Plan B　奥多摩湖コース</div>
+<!-- ── TABS ── -->
+<div class="tabs">
+  <div class="tab on-a" id="tab-a" onclick="sw('a')">Plan A　釜めし なかい</div>
+  <div class="tab" id="tab-b" onclick="sw('b')">Plan B　丹三郎</div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- PLAN A                                                       -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<div class="plan-section active" id="plan-a">
-<div class="wrap">
+<!-- ══════════════════════════════════════════════════
+     PLAN A  釜めし なかい（川井駅）
+     御茶ノ水 9:00発 → 川井駅 10:25着 → 11:00開店 →
+     12:30食事終了 → 12:42川井発 → 12:52奥多摩着 →
+     14:12バス → 14:39東日原 → 15:09鍾乳洞 → 16:15東日原発 →
+     16:42奥多摩着 → 16:52もえぎの湯 → 18:00出発 → 19:40御茶ノ水
+══════════════════════════════════════════════════ -->
+<div class="plan show" id="plan-a">
 <div class="tl">
 
-  <!-- 8:10 出発 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">8:10</div><div class="dot dot-b">🚃</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-b">
-        <div class="card-head">
-          <div class="card-title">御茶ノ水 出発</div>
-          <div class="time-range tr-b">8:10発</div>
-        </div>
-        <div class="card-body">
-          <div class="card-desc">JR中央線快速に乗車。立川で青梅線に乗り換えて鳩ノ巣駅へ。土日は「ホリデー快速おくたま」で直通運転あり（要時刻確認）。</div>
-          <div class="tags">
-            <span class="tag tag-b">中央線快速</span>
-            <span class="tag tag-b">立川で青梅線乗り換え</span>
-            <span class="tag tag-g">IC 約1,144円</span>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">時刻表</span><a href="https://www.jreast-timetable.jp/" target="_blank">https://www.jreast-timetable.jp/</a></div>
-            <div class="url-item"><span class="url-label">快速案内</span><a href="https://www.jreast.co.jp/railway/holiday/holiday_rapid.html" target="_blank">https://www.jreast.co.jp/railway/holiday/holiday_rapid.html</a></div>
-          </div>
+  <!-- 9:00 出発 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">9:00</div><div class="s-dot d-b">🚃</div></div>
+    <div class="s-body"><div class="card acc-b">
+      <div class="card-h"><div class="card-title">御茶ノ水 出発</div><div class="tr-badge tr-b">9:00発</div></div>
+      <div class="card-b">
+        <div class="desc">JR中央線快速に乗車。立川で青梅線に乗り換え、川井駅まで直通。途中下車して釜めし なかいへ。</div>
+        <div class="tags"><span class="tag tag-b">中央線快速</span><span class="tag tag-b">立川乗り換え</span><span class="tag tag-g">IC 約1,044円（川井まで）</span></div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">時刻表</span><a href="https://www.jreast-timetable.jp/" target="_blank">https://www.jreast-timetable.jp/</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 電車90分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚃</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">電車　<span class="dur">約90分</span>　立川乗り換え含む</div>
-    </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚃</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">電車　<strong>約85分</strong>　御茶ノ水→立川（約35分）＋立川→川井（約50分）</div></div></div>
+
+  <!-- 10:25 川井駅着 → 徒歩 → なかい到着・開店待ち -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">10:25</div><div class="s-dot d-a">🚶</div></div>
+    <div class="s-body"><div class="card acc-a">
+      <div class="card-h"><div class="card-title">川井駅 着 → 釜めし なかいへ</div><div class="tr-badge tr-a">10:25〜11:00</div></div>
+      <div class="card-b">
+        <div class="desc">川井駅を下車。釜めし なかいまで徒歩約10分。11:00の開店まで約25分の待ち時間。川沿いの景色を楽しみながら待てる。</div>
+        <div class="tags"><span class="tag tag-a">徒歩約10分</span><span class="tag tag-a">開店待ち 約25分</span></div>
+      </div>
+    </div></div>
   </div>
 
-  <!-- 9:40 鳩ノ巣駅着・ハイキング -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">9:40</div><div class="dot dot-g">🥾</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-g">
-        <div class="card-head">
-          <div class="card-title">鳩ノ巣渓谷ハイキング</div>
-          <div class="time-range tr-g">9:40〜11:10</div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚶</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">川井駅 → 釜めし なかい　徒歩　<strong>約10分</strong></div></div></div>
+
+  <!-- 11:00 釜めし なかい -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">11:00</div><div class="s-dot d-a">🍚</div></div>
+    <div class="s-body"><div class="card acc-a">
+      <div class="card-h"><div class="card-title">釜めし なかい（昼食）</div><div class="tr-badge tr-a">11:00〜12:30</div></div>
+      <div class="card-b">
+        <div class="desc">民家を改装した山里の風情ある釜めし屋。人気のきのこ釜めしセットは水炊き・刺身こんにゃく付きでボリューム満点。天然わさびの石ずり体験も。庭はペット同伴可。</div>
+        <div class="sub">土日祝は混雑あり。待ち時間が出る場合も。営業：平日11:00〜16:00 / 土日祝11:00〜19:00。定休：木曜・第2水曜。</div>
+        <div class="warn">⚠ 14:12発のバスに乗るため12:30には出発すること（川井駅まで徒歩10分 + 電車10分 + 奥多摩駅バス停まで移動）</div>
+        <div class="tags">
+          <span class="tag tag-a">きのこ釜めしセット 約2,100円</span>
+          <span class="tag tag-a">川魚の焼物あり</span>
+          <span class="tag tag-g">川井駅 徒歩約10分</span>
+          <span class="tag tag-red">木曜・第2水曜 定休</span>
         </div>
-        <div class="card-body">
-          <div class="card-desc">鳩ノ巣駅を起点に鳩ノ巣小橋 → 白丸ダム魚道 → 数馬峡橋 → 白丸駅の約2kmコース。多摩川の清流と深い緑が美しい平坦な遊歩道。所要約90分。</div>
-          <div class="card-sub">白丸ダムの魚道は全国でも珍しい観覧型。紅葉シーズン（11月）は特に絶景。白丸駅でゴール。</div>
-          <div class="tags">
-            <span class="tag tag-g">約2km・平坦</span>
-            <span class="tag tag-g">鳩ノ巣小橋</span>
-            <span class="tag tag-b">白丸ダム魚道</span>
-            <span class="tag tag-g">入場無料</span>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">奥多摩町</span><a href="https://www.town.okutama.tokyo.jp/kanko/001.html" target="_blank">https://www.town.okutama.tokyo.jp/kanko/001.html</a></div>
-            <div class="url-item"><span class="url-label">東京とりっぷ</span><a href="https://tokyotrip.net/column/hatonosu/" target="_blank">https://tokyotrip.net/column/hatonosu/</a></div>
-          </div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">公式</span><a href="https://otaba-nakai.com/" target="_blank">https://otaba-nakai.com/</a></div>
+          <div class="url-row"><span class="url-lbl">食べログ</span><a href="https://tabelog.com/tokyo/A1330/A133004/13046090/" target="_blank">https://tabelog.com/tokyo/A1330/A133004/13046090/</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 電車5分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚃</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">白丸駅 → 奥多摩駅　電車　<span class="dur">約5分</span></div>
-    </div>
-  </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚶</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">釜めし なかい → 川井駅　徒歩　<strong>約10分</strong></div></div></div>
 
-  <!-- 11:20 VERTERE -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">11:20</div><div class="dot dot-a">🍺</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-a">
-        <div class="card-head">
-          <div class="card-title">VERTERE TAPROOM（昼食）</div>
-          <div class="time-range tr-a">11:20〜12:20</div>
-        </div>
-        <div class="card-body">
-          <div class="card-desc">奥多摩の天然水で醸造するクラフトビール醸造所の直営タップルーム。多摩川沿いのテラス席でビールと料理を楽しめる。奥多摩駅から徒歩約5分。</div>
-          <div class="warn">⚠ 12:45発のバスに乗るため、12:20には出発すること（バス停まで徒歩5分）</div>
-          <div class="tags">
-            <span class="tag tag-a">クラフトビール</span>
-            <span class="tag tag-a">テラス席</span>
-            <span class="tag tag-g">奥多摩駅 徒歩5分</span>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">公式</span><a href="https://vertere.jp" target="_blank">https://vertere.jp</a></div>
-            <div class="url-item"><span class="url-label">食べログ</span><a href="https://tabelog.com/tokyo/A1330/A133004/13208052/" target="_blank">https://tabelog.com/tokyo/A1330/A133004/13208052/</a></div>
-          </div>
+  <!-- 12:42 川井駅発 → 奥多摩駅 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">12:42</div><div class="s-dot d-b">🚃</div></div>
+    <div class="s-body"><div class="card acc-b">
+      <div class="card-h"><div class="card-title">川井駅 → 奥多摩駅（電車）</div><div class="tr-badge tr-b">12:42発頃</div></div>
+      <div class="card-b">
+        <div class="desc">川井駅から奥多摩駅まで青梅線で約10分。奥多摩駅着12:52頃。14:12発のバスまで約1時間20分あるので、駅周辺を少し散策しても◎</div>
+        <div class="tags"><span class="tag tag-b">青梅線 約10分</span></div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">時刻表</span><a href="https://www.jreast-timetable.jp/timetable/list0519.html" target="_blank">川井駅 時刻表（JR東日本）</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 徒歩5分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚶</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">VERTERE → 奥多摩駅バス停　徒歩　<span class="dur">約5分</span></div>
-    </div>
-  </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚃</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">川井駅 → 奥多摩駅　電車　<strong>約10分</strong></div></div></div>
 
-  <!-- 12:45 バス乗車 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">12:45</div><div class="dot dot-p">🚌</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-p">
-        <div class="card-head">
-          <div class="card-title">奥多摩駅バス停 乗車</div>
-          <div class="time-range tr-p">12:45発</div>
+  <!-- 12:52 奥多摩駅 → バス乗車 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">12:52</div><div class="s-dot d-p">🚌</div></div>
+    <div class="s-body"><div class="card acc-p">
+      <div class="card-h"><div class="card-title">奥多摩駅バス停 → 日原鍾乳洞へ</div><div class="tr-badge tr-p">14:12発</div></div>
+      <div class="card-b">
+        <div class="desc">奥多摩駅12:52着。14:12発まで約1時間20分。駅周辺の氷川渓谷を散策したり、VERTERE TAPROOMで一杯飲むのも良い。1番のりばから東日原行き（奥21系統）に乗車。</div>
+        <div class="btw">
+          <div class="bth"><div class="bth-title">奥多摩駅 → 東日原　土日時刻（奥21系統）</div><div class="bth-sub">所要約27分</div></div>
+          <div class="brows">
+            <div class="brow hi"><span class="dep">14:12発</span><span class="arr">14:39着</span><span class="note">← このプランで使用</span></div>
+            <div class="brow"><span class="dep">15:51発</span><span class="arr">16:18着</span><span class="note">次便（鍾乳洞の見学時間がなくなる）</span></div>
+          </div>
         </div>
-        <div class="card-body">
-          <div class="card-desc">1番のりばから東日原行き（奥21系統）に乗車。IC利用可（460円）。</div>
-          <div class="bus-table-wrap">
-            <div class="bus-table-head">
-              <div class="bus-table-title">奥多摩駅 → 東日原　土日時刻（奥21系統）</div>
-              <div class="bus-table-sub">所要約27分</div>
-            </div>
-            <div class="bus-rows">
-              <div class="bus-row hi"><span class="dep">12:45発</span><span class="arr">13:12着</span><span class="note">← このプランで使用</span></div>
-              <div class="bus-row"><span class="dep">14:12発</span><span class="arr">14:39着</span><span class="note">次便（鍾乳洞の滞在が短くなる）</span></div>
-            </div>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">バスナビ</span><a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042103&course=0000430702&stopNo=1" target="_blank">バスナビ.com 奥21系統（往路）</a></div>
-          </div>
+        <div class="tags"><span class="tag tag-p">バス約27分</span><span class="tag tag-p">IC 460円</span></div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">バスナビ</span><a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042103&course=0000430702&stopNo=1" target="_blank">バスナビ.com 奥21系統（往路）</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 バス27分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚌</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">バス（奥21）　<span class="dur">約27分</span>　奥多摩駅 12:45発</div>
-    </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚌</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">バス（奥21）　<strong>約27分</strong>　奥多摩駅 14:12発</div></div></div>
+
+  <!-- 14:39 東日原 → 徒歩 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">14:39</div><div class="s-dot d-p">🚶</div></div>
+    <div class="s-body"><div class="card acc-p">
+      <div class="card-h"><div class="card-title">東日原バス停 → 日原鍾乳洞（徒歩）</div><div class="tr-badge tr-p">14:39〜15:10</div></div>
+      <div class="card-b">
+        <div class="desc">東日原バス停から日原街道を歩いて鍾乳洞へ。車も通る舗装路を緩やかに上る約1.5km・約30分。</div>
+        <div class="tags"><span class="tag tag-p">徒歩約30分</span><span class="tag tag-p">約1.5km・舗装路・緩やかな上り</span></div>
+      </div>
+    </div></div>
   </div>
 
-  <!-- 13:12 東日原着・徒歩 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">13:12</div><div class="dot dot-p">🚶</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-p">
-        <div class="card-head">
-          <div class="card-title">東日原バス停 → 日原鍾乳洞（徒歩）</div>
-          <div class="time-range tr-p">13:12〜13:42</div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚶</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">東日原 → 日原鍾乳洞　徒歩　<strong>約30分</strong>　上り坂</div></div></div>
+
+  <!-- 15:10 日原鍾乳洞 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">15:10</div><div class="s-dot d-r">🦇</div></div>
+    <div class="s-body"><div class="card acc-r">
+      <div class="card-h"><div class="card-title">日原鍾乳洞</div><div class="tr-badge tr-r">15:10〜16:00</div></div>
+      <div class="card-b">
+        <div class="desc">総延長1,270m・高低差134mの関東最大級の鍾乳洞。荘厳な石筍・鍾乳石が立ち並ぶ幻想的な空間。年間を通じて洞内は約10℃と冷涼。見学所要時間は約40〜60分。</div>
+        <div class="sub">営業時間：9:00〜17:00（12〜3月は16:30）。月曜定休。入場料：大人800円・中学生600円・小学生500円。</div>
+        <div class="warn">⚠ 16:00には出発して東日原バス停へ。16:53発のバスに乗ること。</div>
+        <div class="tags">
+          <span class="tag tag-r">洞内約10℃ → 上着必携</span>
+          <span class="tag tag-p">大人 800円</span>
+          <span class="tag tag-red">月曜定休</span>
         </div>
-        <div class="card-body">
-          <div class="card-desc">東日原バス停から日原街道を歩いて鍾乳洞へ。舗装された道路（車も通行）を緩やかに上る約1.5km・約30分。</div>
-          <div class="tags">
-            <span class="tag tag-p">徒歩約30分</span>
-            <span class="tag tag-p">約1.5km 舗装路</span>
-            <span class="tag tag-b">緩やかな上り坂</span>
-          </div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">公式</span><a href="http://www.nippara.com/" target="_blank">http://www.nippara.com/</a></div>
+          <div class="url-row"><span class="url-lbl">YAMA HACK</span><a href="https://yamahack.com/111" target="_blank">https://yamahack.com/111</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 徒歩30分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚶</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">東日原 → 日原鍾乳洞　徒歩　<span class="dur">約30分</span>　上り坂</div>
-    </div>
-  </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚶</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">日原鍾乳洞 → 東日原バス停　徒歩　<strong>約30分</strong>　下り坂</div></div></div>
 
-  <!-- 13:45 鍾乳洞 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">13:45</div><div class="dot dot-r">🦇</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-r">
-        <div class="card-head">
-          <div class="card-title">日原鍾乳洞</div>
-          <div class="time-range tr-r">13:45〜14:45</div>
+  <!-- 16:30 東日原 → バス -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">16:30</div><div class="s-dot d-p">🚌</div></div>
+    <div class="s-body"><div class="card acc-p">
+      <div class="card-h"><div class="card-title">東日原バス停 → 奥多摩駅</div><div class="tr-badge tr-p">16:53発</div></div>
+      <div class="card-b">
+        <div class="desc">16:00に鍾乳洞出発 → 徒歩30分 → 16:30頃に東日原着。16:53発のバスまで約23分待ち。</div>
+        <div class="btw">
+          <div class="bth"><div class="bth-title">東日原 → 奥多摩駅　土日時刻（奥21系統）</div><div class="bth-sub">所要約27分</div></div>
+          <div class="brows">
+            <div class="brow hi"><span class="dep">16:53発</span><span class="arr">17:20着</span><span class="note">← 目標</span></div>
+            <div class="brow"><span class="dep">18:18発</span><span class="arr">18:45着</span><span class="note">次便（温泉に間に合わない）</span></div>
+          </div>
         </div>
-        <div class="card-body">
-          <div class="card-desc">総延長1,270m・高低差134mの関東最大級の鍾乳洞。荘厳な石筍・鍾乳石が立ち並ぶ。洞内は年間を通して約10℃と冷涼。見学所要時間は約40〜60分。</div>
-          <div class="card-sub">月曜定休。営業時間：9:00〜17:00（12〜3月は16:30まで）。入場料：大人800円・中学生600円・小学生500円。</div>
-          <div class="warn">⚠ 入場前に帰りのバス時刻（東日原発）を確認すること。14:45には鍾乳洞を出発して徒歩で戻る。</div>
-          <div class="tags">
-            <span class="tag tag-r">洞内約10℃ → 上着必携</span>
-            <span class="tag tag-p">大人 800円</span>
-            <span class="tag tag-red">月曜定休</span>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">公式</span><a href="http://www.nippara.com/" target="_blank">http://www.nippara.com/</a></div>
-            <div class="url-item"><span class="url-label">YAMA HACK</span><a href="https://yamahack.com/111" target="_blank">https://yamahack.com/111</a></div>
-            <div class="url-item"><span class="url-label">じゃらん</span><a href="https://www.jalan.net/kankou/spt_13308ab2070138735/" target="_blank">https://www.jalan.net/kankou/spt_13308ab2070138735/</a></div>
-          </div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">バスナビ</span><a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042550&course=0000430701&stopNo=1" target="_blank">バスナビ.com 奥21系統（復路）</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 徒歩30分（下り） -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚶</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">日原鍾乳洞 → 東日原バス停　徒歩　<span class="dur">約30分</span>　下り坂</div>
-    </div>
-  </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚌</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">バス（奥21）　<strong>約27分</strong>　東日原 16:53発</div></div></div>
 
-  <!-- 15:15 東日原 バス待ち -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">15:15</div><div class="dot dot-p">🚌</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-p">
-        <div class="card-head">
-          <div class="card-title">東日原バス停 → 奥多摩駅</div>
-          <div class="time-range tr-p">15:43発</div>
+  <!-- 17:20 もえぎの湯 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">17:20</div><div class="s-dot d-pk">♨</div></div>
+    <div class="s-body"><div class="card acc-pk">
+      <div class="card-h"><div class="card-title">奥多摩温泉 もえぎの湯</div><div class="tr-badge tr-pk">17:30〜18:45</div></div>
+      <div class="card-b">
+        <div class="desc">奥多摩駅17:20着 → 徒歩10分 → 17:30入浴。多摩川を見渡す露天風呂が人気の日帰り温泉。源泉100%のアルカリ性単純温泉。最終受付19:00なのでゆっくり入れる。</div>
+        <div class="sub">営業：10:00〜20:00（最終受付19:00）。混雑時は入場制限あり。</div>
+        <div class="tags">
+          <span class="tag tag-g">源泉100%</span><span class="tag tag-g">露天風呂あり</span>
+          <span class="tag tag-b">大人900円（繁忙期1,050円）</span><span class="tag tag-b">奥多摩駅 徒歩10分</span>
         </div>
-        <div class="card-body">
-          <div class="card-desc">14:45に鍾乳洞を出発 → 徒歩30分 → 15:15頃に東日原着。15:43発のバスまで約28分の待ち時間。</div>
-          <div class="warn">⚠ 15:43発を逃すと次は16:57発。もえぎの湯の時間がタイトになる。</div>
-          <div class="bus-table-wrap">
-            <div class="bus-table-head">
-              <div class="bus-table-title">東日原 → 奥多摩駅　土日時刻（奥21系統）</div>
-              <div class="bus-table-sub">所要約27分</div>
-            </div>
-            <div class="bus-rows">
-              <div class="bus-row hi"><span class="dep">15:43発</span><span class="arr">16:10着</span><span class="note">← 目標（温泉ゆっくり）</span></div>
-              <div class="bus-row"><span class="dep">16:57発</span><span class="arr">17:24着</span><span class="note">温泉の時間がタイトに</span></div>
-              <div class="bus-row"><span class="dep">18:18発</span><span class="arr">18:45着</span><span class="note">温泉に間に合わない</span></div>
-            </div>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">バスナビ</span><a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042550&course=0000430701&stopNo=1" target="_blank">バスナビ.com 奥21系統（復路）</a></div>
-          </div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">公式</span><a href="https://www.okutamas.co.jp/moegi/" target="_blank">https://www.okutamas.co.jp/moegi/</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 バス27分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚌</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">バス（奥21）　<span class="dur">約27分</span>　東日原 15:43発</div>
-    </div>
-  </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚃</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">もえぎの湯 → 奥多摩駅 徒歩<strong>10分</strong> → 御茶ノ水 電車<strong>約1時間40分</strong></div></div></div>
 
-  <!-- 16:10 奥多摩着・徒歩 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">16:10</div><div class="dot dot-pk">♨</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-pk">
-        <div class="card-head">
-          <div class="card-title">奥多摩温泉 もえぎの湯</div>
-          <div class="time-range tr-pk">16:20〜17:30</div>
-        </div>
-        <div class="card-body">
-          <div class="card-desc">奥多摩駅16:10着 → 徒歩10分 → 16:20入浴。多摩川を見渡す露天風呂が人気の日帰り温泉。源泉100%のアルカリ性単純温泉。鍾乳洞で冷えた体を芯から温める絶好の締めくくり。</div>
-          <div class="card-sub">営業時間：10:00〜20:00（最終受付19:00）。混雑時は入場制限あり。</div>
-          <div class="tags">
-            <span class="tag tag-g">源泉100%</span>
-            <span class="tag tag-g">露天風呂あり</span>
-            <span class="tag tag-b">大人900円（繁忙期1,050円）</span>
-            <span class="tag tag-b">奥多摩駅 徒歩10分</span>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">公式</span><a href="https://www.okutamas.co.jp/moegi/" target="_blank">https://www.okutamas.co.jp/moegi/</a></div>
-          </div>
-        </div>
+  <!-- 20:35 着 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">20:35</div><div class="s-dot d-b">🏠</div></div>
+    <div class="s-body"><div class="card acc-b">
+      <div class="card-h"><div class="card-title">御茶ノ水 着</div><div class="tr-badge tr-b">20:35頃</div></div>
+      <div class="card-b">
+        <div class="desc">18:45頃にもえぎの湯を出発。奥多摩駅から青梅線・中央線快速で約1時間40分。20:35頃に御茶ノ水着。</div>
+        <div class="tags"><span class="tag tag-b">青梅線→中央線快速</span><span class="tag tag-g">IC 約1,144円（奥多摩から）</span></div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 徒歩10分 + 電車90分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚃</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">もえぎの湯 → 奥多摩駅 徒歩<span class="dur">10分</span> → 御茶ノ水 電車<span class="dur">約1時間40分</span></div>
-    </div>
-  </div>
-
-  <!-- 19:20 御茶ノ水着 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">19:20</div><div class="dot dot-b">🏠</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-b">
-        <div class="card-head">
-          <div class="card-title">御茶ノ水 着</div>
-          <div class="time-range tr-b">19:20頃</div>
-        </div>
-        <div class="card-body">
-          <div class="card-desc">17:30頃にもえぎの湯を出発。奥多摩駅から青梅線・中央線快速で御茶ノ水へ。約1時間40分の乗車。</div>
-          <div class="tags">
-            <span class="tag tag-b">青梅線→中央線快速</span>
-            <span class="tag tag-g">IC 約1,144円</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /tl -->
-</div><!-- /wrap -->
+</div>
 </div><!-- /plan-a -->
 
 
-<!-- ═══════════════════════════════════════════════════════════ -->
-<!-- PLAN B                                                       -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<div class="plan-section" id="plan-b">
-<div class="wrap">
+<!-- ══════════════════════════════════════════════════
+     PLAN B  そば・うどん 丹三郎（古里駅）
+     御茶ノ水 9:30発 → 古里駅 11:00着 → 徒歩6分 →
+     11:30開店 → 13:00食事終了 → 徒歩6分 →
+     13:10古里発 → 13:20奥多摩着 →
+     14:12バス → 14:39東日原 → 15:10鍾乳洞 →
+     16:00出発 → 16:30東日原 → 16:53発バス →
+     17:20奥多摩着 → 17:30もえぎの湯 →
+     18:45出発 → 20:25御茶ノ水
+══════════════════════════════════════════════════ -->
+<div class="plan" id="plan-b">
 <div class="tl">
 
-  <!-- 7:50 出発（B は早め） -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">7:50</div><div class="dot dot-b">🚃</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-b">
-        <div class="card-head">
-          <div class="card-title">御茶ノ水 出発</div>
-          <div class="time-range tr-b">7:50発</div>
-        </div>
-        <div class="card-body">
-          <div class="card-desc">Plan Bは奥多摩湖バスに乗るためPlan Aより20分早く出発。JR中央線快速で立川へ、青梅線に乗り換えて奥多摩へ。</div>
-          <div class="card-sub">土日は「ホリデー快速おくたま」で直通運転あり。奥多摩駅着 9:20〜9:30頃を目標に。</div>
-          <div class="tags">
-            <span class="tag tag-b">中央線快速→青梅線</span>
-            <span class="tag tag-g">IC 約1,144円</span>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">時刻表</span><a href="https://www.jreast-timetable.jp/" target="_blank">https://www.jreast-timetable.jp/</a></div>
-            <div class="url-item"><span class="url-label">快速案内</span><a href="https://www.jreast.co.jp/railway/holiday/holiday_rapid.html" target="_blank">https://www.jreast.co.jp/railway/holiday/holiday_rapid.html</a></div>
-          </div>
+  <!-- 9:30 出発 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">9:30</div><div class="s-dot d-b">🚃</div></div>
+    <div class="s-body"><div class="card acc-b">
+      <div class="card-h"><div class="card-title">御茶ノ水 出発</div><div class="tr-badge tr-b">9:30発</div></div>
+      <div class="card-b">
+        <div class="desc">JR中央線快速に乗車。立川で青梅線に乗り換え、古里駅まで直通。丹三郎の開店（11:30）に合わせた出発時刻。</div>
+        <div class="tags"><span class="tag tag-b">中央線快速</span><span class="tag tag-b">立川乗り換え</span><span class="tag tag-g">IC 約1,044円（古里まで）</span></div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">時刻表</span><a href="https://www.jreast-timetable.jp/" target="_blank">https://www.jreast-timetable.jp/</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 電車90分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚃</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">電車　<span class="dur">約90分</span>　立川乗り換え含む</div>
-    </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚃</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">電車　<strong>約90分</strong>　御茶ノ水→立川（約35分）＋立川→古里（約55分）</div></div></div>
+
+  <!-- 11:00 古里駅着 → 待ち -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">11:00</div><div class="s-dot d-teal">🚶</div></div>
+    <div class="s-body"><div class="card acc-teal">
+      <div class="card-h"><div class="card-title">古里駅 着 → 丹三郎へ</div><div class="tr-badge tr-teal">11:00〜11:30</div></div>
+      <div class="card-b">
+        <div class="desc">古里駅を下車。丹三郎まで徒歩約6分。11:30の開店まで約24分の待ち時間。駅前や川沿いを散策して待とう。</div>
+        <div class="tags"><span class="tag tag-teal">徒歩約6分</span><span class="tag tag-teal">開店待ち 約24分</span></div>
+      </div>
+    </div></div>
   </div>
 
-  <!-- 9:20 奥多摩駅 → バス乗車 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">9:20</div><div class="dot dot-b">🚌</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-b">
-        <div class="card-head">
-          <div class="card-title">奥多摩駅 → バスで奥多摩湖へ</div>
-          <div class="time-range tr-b">9:35発頃</div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚶</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">古里駅 → そば・うどん 丹三郎　徒歩　<strong>約6分</strong></div></div></div>
+
+  <!-- 11:30 丹三郎 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">11:30</div><div class="s-dot d-teal">🍜</div></div>
+    <div class="s-body"><div class="card acc-teal">
+      <div class="card-h"><div class="card-title">そば・うどん 丹三郎（昼食）</div><div class="tr-badge tr-teal">11:30〜13:00</div></div>
+      <div class="card-b">
+        <div class="desc">古民家で味わう奥多摩の手打ちそば・うどん。地元食材を使ったシンプルで滋味深い料理が人気。せいろそば・天せいろ・とろろそばが定番。そば膳コース（要予約）もあり。</div>
+        <div class="sub">営業：11:30〜15:00（売切れ次第終了）。毎月1・11・21・31日定休。売り切れることがあるので早めに到着を。</div>
+        <div class="warn">⚠ 14:12発のバスに乗るため13:00には出発すること（古里駅まで徒歩6分 + 電車10分 + 奥多摩駅バス停まで移動）</div>
+        <div class="tags">
+          <span class="tag tag-teal">せいろそば 864円〜</span>
+          <span class="tag tag-teal">天せいろそば 1,512円</span>
+          <span class="tag tag-g">古里駅 徒歩6分</span>
+          <span class="tag tag-red">毎月1・11・21・31日 定休</span>
         </div>
-        <div class="card-body">
-          <div class="card-desc">奥多摩駅前バス停から留浦行き（奥11系統）または奥多摩湖行き（奥15系統）に乗車。小河内神社バス停まで約25分。</div>
-          <div class="warn">⚠ 4月改正後のダイヤのため具体的な時刻は西東京バス公式で必ず確認すること</div>
-          <div class="tags">
-            <span class="tag tag-b">奥11 or 奥15系統</span>
-            <span class="tag tag-b">バス約25分</span>
-            <span class="tag tag-a">IC 約430円</span>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">バスナビ</span><a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042103&course=0000430102&stopNo=1" target="_blank">バスナビ.com 奥多摩湖方面</a></div>
-            <div class="url-item"><span class="url-label">西東京バス</span><a href="https://www.nisitokyobus.co.jp/rosen/pocket.html" target="_blank">https://www.nisitokyobus.co.jp/rosen/pocket.html</a></div>
-          </div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">食べログ</span><a href="https://tabelog.com/tokyo/A1330/A133004/13016476/" target="_blank">https://tabelog.com/tokyo/A1330/A133004/13016476/</a></div>
+          <div class="url-row"><span class="url-lbl">奥多摩観光</span><a href="https://okutama-k.jimdofree.com/%E9%A3%9F%E4%BA%8B/%E3%81%9D%E3%81%B0-%E3%81%86%E3%81%A9%E3%82%93-%E4%B8%B9%E4%B8%89%E9%83%8E/" target="_blank">奥多摩観光協会 丹三郎紹介ページ</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 バス25分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚌</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">バス（奥11/奥15）　<span class="dur">約25分</span>　奥多摩駅 9:35発頃</div>
-    </div>
-  </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚶</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">丹三郎 → 古里駅　徒歩　<strong>約6分</strong></div></div></div>
 
-  <!-- 10:00 奥多摩湖 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">10:00</div><div class="dot dot-b">🌊</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-b">
-        <div class="card-head">
-          <div class="card-title">奥多摩湖・麦山浮橋（ドラム缶橋）</div>
-          <div class="time-range tr-b">10:00〜11:15</div>
-        </div>
-        <div class="card-body">
-          <div class="card-desc">東京都の水瓶・小河内ダムが造る広大な人造湖。全長約220mの「麦山浮橋（通称ドラム缶橋）」は湖面を歩いて渡れる奥多摩随一の体験スポット。湖面スレスレの独特な浮遊感が味わえる。</div>
-          <div class="card-sub">小河内神社バス停から浮橋入口まで徒歩約5分。湖畔の「奥多摩水と緑のふれあい館」も無料で立ち寄り可能。散策後は小河内神社バス停から奥多摩駅行きに乗車。</div>
-          <div class="tags">
-            <span class="tag tag-b">麦山浮橋 全長220m</span>
-            <span class="tag tag-g">入場無料</span>
-            <span class="tag tag-a">水量次第で通行止めあり</span>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">観光協会</span><a href="https://www.okutama.gr.jp/site/sightseeing/" target="_blank">https://www.okutama.gr.jp/site/sightseeing/</a></div>
-            <div class="url-item"><span class="url-label">ふれあい館</span><a href="https://www.okutamas.co.jp/" target="_blank">https://www.okutamas.co.jp/</a></div>
-          </div>
+  <!-- 13:10 古里駅 → 奥多摩 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">13:10</div><div class="s-dot d-b">🚃</div></div>
+    <div class="s-body"><div class="card acc-b">
+      <div class="card-h"><div class="card-title">古里駅 → 奥多摩駅（電車）</div><div class="tr-badge tr-b">13:10発頃</div></div>
+      <div class="card-b">
+        <div class="desc">古里駅から奥多摩駅まで青梅線で約7分。奥多摩駅着13:20頃。14:12発のバスまで約50分。氷川渓谷の散策や駅周辺でひと息つこう。</div>
+        <div class="tags"><span class="tag tag-b">青梅線 約7分</span></div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">時刻表</span><a href="https://ekitan.com/timetable/railway/line-station/169-21/d2" target="_blank">古里駅 時刻表（奥多摩方面）</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 バス25分（戻り） -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚌</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">小河内神社 → 奥多摩駅　バス　<span class="dur">約25分</span>　11:15発頃</div>
-    </div>
-  </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚃</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">古里駅 → 奥多摩駅　電車　<strong>約7分</strong></div></div></div>
 
-  <!-- 11:45 VERTERE -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">11:45</div><div class="dot dot-a">🍺</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-a">
-        <div class="card-head">
-          <div class="card-title">VERTERE TAPROOM（昼食）</div>
-          <div class="time-range tr-a">11:45〜12:20</div>
+  <!-- 13:20 奥多摩駅 → バス -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">13:20</div><div class="s-dot d-p">🚌</div></div>
+    <div class="s-body"><div class="card acc-p">
+      <div class="card-h"><div class="card-title">奥多摩駅バス停 → 日原鍾乳洞へ</div><div class="tr-badge tr-p">14:12発</div></div>
+      <div class="card-b">
+        <div class="desc">奥多摩駅13:20着。14:12発まで約50分。氷川渓谷の遊歩道や奥多摩ビジターセンターを見学するのもおすすめ。1番のりばから東日原行き（奥21系統）に乗車。</div>
+        <div class="btw">
+          <div class="bth"><div class="bth-title">奥多摩駅 → 東日原　土日時刻（奥21系統）</div><div class="bth-sub">所要約27分</div></div>
+          <div class="brows">
+            <div class="brow hi"><span class="dep">14:12発</span><span class="arr">14:39着</span><span class="note">← このプランで使用</span></div>
+            <div class="brow"><span class="dep">15:51発</span><span class="arr">16:18着</span><span class="note">次便（鍾乳洞の見学時間がなくなる）</span></div>
+          </div>
         </div>
-        <div class="card-body">
-          <div class="card-desc">奥多摩の天然水で醸造するクラフトビール醸造所の直営タップルーム。奥多摩駅から徒歩約5分。多摩川沿いのテラス席。</div>
-          <div class="warn">⚠ 12:45発のバスに乗るため、12:20には出発すること（バス停まで徒歩5分）</div>
-          <div class="tags">
-            <span class="tag tag-a">クラフトビール</span>
-            <span class="tag tag-a">テラス席</span>
-            <span class="tag tag-g">奥多摩駅 徒歩5分</span>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">公式</span><a href="https://vertere.jp" target="_blank">https://vertere.jp</a></div>
-            <div class="url-item"><span class="url-label">食べログ</span><a href="https://tabelog.com/tokyo/A1330/A133004/13208052/" target="_blank">https://tabelog.com/tokyo/A1330/A133004/13208052/</a></div>
-          </div>
+        <div class="tags"><span class="tag tag-p">バス約27分</span><span class="tag tag-p">IC 460円</span></div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">バスナビ</span><a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042103&course=0000430702&stopNo=1" target="_blank">バスナビ.com 奥21系統（往路）</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 徒歩5分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚶</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">VERTERE → 奥多摩駅バス停　徒歩　<span class="dur">約5分</span></div>
-    </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚌</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">バス（奥21）　<strong>約27分</strong>　奥多摩駅 14:12発</div></div></div>
+
+  <!-- 14:39 東日原 → 徒歩 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">14:39</div><div class="s-dot d-p">🚶</div></div>
+    <div class="s-body"><div class="card acc-p">
+      <div class="card-h"><div class="card-title">東日原バス停 → 日原鍾乳洞（徒歩）</div><div class="tr-badge tr-p">14:39〜15:10</div></div>
+      <div class="card-b">
+        <div class="desc">東日原バス停から日原街道を歩いて鍾乳洞へ。車も通る舗装路を緩やかに上る約1.5km・約30分。</div>
+        <div class="tags"><span class="tag tag-p">徒歩約30分</span><span class="tag tag-p">約1.5km・舗装路・緩やかな上り</span></div>
+      </div>
+    </div></div>
   </div>
 
-  <!-- 12:45 バス（鍾乳洞行き） Plan Bも同じ -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">12:45</div><div class="dot dot-p">🚌</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-p">
-        <div class="card-head">
-          <div class="card-title">奥多摩駅バス停 乗車</div>
-          <div class="time-range tr-p">12:45発</div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚶</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">東日原 → 日原鍾乳洞　徒歩　<strong>約30分</strong>　上り坂</div></div></div>
+
+  <!-- 15:10 日原鍾乳洞 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">15:10</div><div class="s-dot d-r">🦇</div></div>
+    <div class="s-body"><div class="card acc-r">
+      <div class="card-h"><div class="card-title">日原鍾乳洞</div><div class="tr-badge tr-r">15:10〜16:00</div></div>
+      <div class="card-b">
+        <div class="desc">総延長1,270m・高低差134mの関東最大級の鍾乳洞。年間を通じて洞内は約10℃と冷涼。見学所要時間は約40〜60分。</div>
+        <div class="sub">営業時間：9:00〜17:00（12〜3月は16:30）。月曜定休。入場料：大人800円・中学生600円・小学生500円。</div>
+        <div class="warn">⚠ 16:00には出発して東日原バス停へ。16:53発のバスに乗ること。</div>
+        <div class="tags">
+          <span class="tag tag-r">洞内約10℃ → 上着必携</span>
+          <span class="tag tag-p">大人 800円</span>
+          <span class="tag tag-red">月曜定休</span>
         </div>
-        <div class="card-body">
-          <div class="card-desc">1番のりばから東日原行き（奥21系統）に乗車。IC利用可（460円）。</div>
-          <div class="bus-table-wrap">
-            <div class="bus-table-head">
-              <div class="bus-table-title">奥多摩駅 → 東日原　土日時刻（奥21系統）</div>
-              <div class="bus-table-sub">所要約27分</div>
-            </div>
-            <div class="bus-rows">
-              <div class="bus-row hi"><span class="dep">12:45発</span><span class="arr">13:12着</span><span class="note">← このプランで使用</span></div>
-              <div class="bus-row"><span class="dep">14:12発</span><span class="arr">14:39着</span><span class="note">次便</span></div>
-            </div>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">バスナビ</span><a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042103&course=0000430702&stopNo=1" target="_blank">バスナビ.com 奥21系統（往路）</a></div>
-          </div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">公式</span><a href="http://www.nippara.com/" target="_blank">http://www.nippara.com/</a></div>
+          <div class="url-row"><span class="url-lbl">YAMA HACK</span><a href="https://yamahack.com/111" target="_blank">https://yamahack.com/111</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 バス27分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚌</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">バス（奥21）　<span class="dur">約27分</span>　奥多摩駅 12:45発</div>
-    </div>
-  </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚶</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">日原鍾乳洞 → 東日原バス停　徒歩　<strong>約30分</strong>　下り坂</div></div></div>
 
-  <!-- 13:12 東日原→徒歩 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">13:12</div><div class="dot dot-p">🚶</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-p">
-        <div class="card-head">
-          <div class="card-title">東日原バス停 → 日原鍾乳洞（徒歩）</div>
-          <div class="time-range tr-p">13:12〜13:42</div>
-        </div>
-        <div class="card-body">
-          <div class="card-desc">東日原バス停から日原街道を歩いて鍾乳洞へ。舗装路を緩やかに上る約1.5km・約30分。</div>
-          <div class="tags">
-            <span class="tag tag-p">徒歩約30分</span>
-            <span class="tag tag-p">約1.5km 舗装路</span>
+  <!-- 16:30 東日原 → バス -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">16:30</div><div class="s-dot d-p">🚌</div></div>
+    <div class="s-body"><div class="card acc-p">
+      <div class="card-h"><div class="card-title">東日原バス停 → 奥多摩駅</div><div class="tr-badge tr-p">16:53発</div></div>
+      <div class="card-b">
+        <div class="desc">16:00に鍾乳洞出発 → 徒歩30分 → 16:30頃に東日原着。16:53発のバスまで約23分待ち。</div>
+        <div class="btw">
+          <div class="bth"><div class="bth-title">東日原 → 奥多摩駅　土日時刻（奥21系統）</div><div class="bth-sub">所要約27分</div></div>
+          <div class="brows">
+            <div class="brow hi"><span class="dep">16:53発</span><span class="arr">17:20着</span><span class="note">← 目標</span></div>
+            <div class="brow"><span class="dep">18:18発</span><span class="arr">18:45着</span><span class="note">次便（温泉に間に合わない）</span></div>
           </div>
+        </div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">バスナビ</span><a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042550&course=0000430701&stopNo=1" target="_blank">バスナビ.com 奥21系統（復路）</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 徒歩30分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚶</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">東日原 → 日原鍾乳洞　徒歩　<span class="dur">約30分</span>　上り坂</div>
-    </div>
-  </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚌</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">バス（奥21）　<strong>約27分</strong>　東日原 16:53発</div></div></div>
 
-  <!-- 13:45 鍾乳洞 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">13:45</div><div class="dot dot-r">🦇</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-r">
-        <div class="card-head">
-          <div class="card-title">日原鍾乳洞</div>
-          <div class="time-range tr-r">13:45〜14:45</div>
+  <!-- 17:20 もえぎの湯 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">17:20</div><div class="s-dot d-pk">♨</div></div>
+    <div class="s-body"><div class="card acc-pk">
+      <div class="card-h"><div class="card-title">奥多摩温泉 もえぎの湯</div><div class="tr-badge tr-pk">17:30〜18:45</div></div>
+      <div class="card-b">
+        <div class="desc">奥多摩駅17:20着 → 徒歩10分 → 17:30入浴。多摩川を見渡す露天風呂が人気の日帰り温泉。源泉100%のアルカリ性単純温泉。最終受付19:00なのでゆっくり入れる。</div>
+        <div class="sub">営業：10:00〜20:00（最終受付19:00）。混雑時は入場制限あり。</div>
+        <div class="tags">
+          <span class="tag tag-g">源泉100%</span><span class="tag tag-g">露天風呂あり</span>
+          <span class="tag tag-b">大人900円（繁忙期1,050円）</span><span class="tag tag-b">奥多摩駅 徒歩10分</span>
         </div>
-        <div class="card-body">
-          <div class="card-desc">総延長1,270m・高低差134mの関東最大級の鍾乳洞。洞内は年間を通して約10℃と冷涼。見学所要時間は約40〜60分。</div>
-          <div class="card-sub">月曜定休。営業時間：9:00〜17:00（12〜3月は16:30）。入場料：大人800円・中学生600円・小学生500円。</div>
-          <div class="warn">⚠ 入場前に帰りのバス時刻（東日原発）を確認。14:45には出発して徒歩で東日原へ戻る。</div>
-          <div class="tags">
-            <span class="tag tag-r">洞内約10℃ → 上着必携</span>
-            <span class="tag tag-p">大人 800円</span>
-            <span class="tag tag-red">月曜定休</span>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">公式</span><a href="http://www.nippara.com/" target="_blank">http://www.nippara.com/</a></div>
-            <div class="url-item"><span class="url-label">YAMA HACK</span><a href="https://yamahack.com/111" target="_blank">https://yamahack.com/111</a></div>
-            <div class="url-item"><span class="url-label">じゃらん</span><a href="https://www.jalan.net/kankou/spt_13308ab2070138735/" target="_blank">https://www.jalan.net/kankou/spt_13308ab2070138735/</a></div>
-          </div>
+        <div class="urls">
+          <div class="url-row"><span class="url-lbl">公式</span><a href="https://www.okutamas.co.jp/moegi/" target="_blank">https://www.okutamas.co.jp/moegi/</a></div>
         </div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 徒歩30分（下り） -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚶</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">日原鍾乳洞 → 東日原バス停　徒歩　<span class="dur">約30分</span>　下り坂</div>
-    </div>
-  </div>
+  <div class="transit"><div class="t-left"><div class="t-line"></div><div class="t-ico">🚃</div><div class="t-line"></div></div>
+  <div class="t-body"><div class="t-pill">もえぎの湯 → 奥多摩駅 徒歩<strong>10分</strong> → 御茶ノ水 電車<strong>約1時間40分</strong></div></div></div>
 
-  <!-- 15:15 東日原バス待ち -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">15:15</div><div class="dot dot-p">🚌</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-p">
-        <div class="card-head">
-          <div class="card-title">東日原バス停 → 奥多摩駅</div>
-          <div class="time-range tr-p">15:43発</div>
-        </div>
-        <div class="card-body">
-          <div class="card-desc">14:45に鍾乳洞出発 → 徒歩30分 → 15:15頃に東日原着。15:43発のバスまで約28分待ち。</div>
-          <div class="warn">⚠ 15:43発を逃すと次は16:57発。もえぎの湯がタイトになる。</div>
-          <div class="bus-table-wrap">
-            <div class="bus-table-head">
-              <div class="bus-table-title">東日原 → 奥多摩駅　土日時刻（奥21系統）</div>
-              <div class="bus-table-sub">所要約27分</div>
-            </div>
-            <div class="bus-rows">
-              <div class="bus-row hi"><span class="dep">15:43発</span><span class="arr">16:10着</span><span class="note">← 目標（温泉ゆっくり）</span></div>
-              <div class="bus-row"><span class="dep">16:57発</span><span class="arr">17:24着</span><span class="note">温泉の時間がタイトに</span></div>
-              <div class="bus-row"><span class="dep">18:18発</span><span class="arr">18:45着</span><span class="note">温泉に間に合わない</span></div>
-            </div>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">バスナビ</span><a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042550&course=0000430701&stopNo=1" target="_blank">バスナビ.com 奥21系統（復路）</a></div>
-          </div>
-        </div>
+  <!-- 20:25 着 -->
+  <div class="stop">
+    <div class="s-left"><div class="s-time">20:25</div><div class="s-dot d-b">🏠</div></div>
+    <div class="s-body"><div class="card acc-b">
+      <div class="card-h"><div class="card-title">御茶ノ水 着</div><div class="tr-badge tr-b">20:25頃</div></div>
+      <div class="card-b">
+        <div class="desc">18:45頃にもえぎの湯を出発。奥多摩駅から青梅線・中央線快速で約1時間40分。20:25頃に御茶ノ水着。</div>
+        <div class="tags"><span class="tag tag-b">青梅線→中央線快速</span><span class="tag tag-g">IC 約1,144円（奥多摩から）</span></div>
       </div>
-    </div>
+    </div></div>
   </div>
 
-  <!-- 移動 バス27分 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚌</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">バス（奥21）　<span class="dur">約27分</span>　東日原 15:43発</div>
-    </div>
-  </div>
-
-  <!-- 16:10 もえぎの湯 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">16:10</div><div class="dot dot-pk">♨</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-pk">
-        <div class="card-head">
-          <div class="card-title">奥多摩温泉 もえぎの湯</div>
-          <div class="time-range tr-pk">16:20〜17:30</div>
-        </div>
-        <div class="card-body">
-          <div class="card-desc">奥多摩駅16:10着 → 徒歩10分 → 16:20入浴。多摩川を見渡す露天風呂が人気。源泉100%のアルカリ性単純温泉。</div>
-          <div class="card-sub">営業時間：10:00〜20:00（最終受付19:00）。混雑時は入場制限あり。</div>
-          <div class="tags">
-            <span class="tag tag-g">源泉100%</span>
-            <span class="tag tag-g">露天風呂あり</span>
-            <span class="tag tag-b">大人900円（繁忙期1,050円）</span>
-            <span class="tag tag-b">奥多摩駅 徒歩10分</span>
-          </div>
-          <div class="url-list">
-            <div class="url-item"><span class="url-label">公式</span><a href="https://www.okutamas.co.jp/moegi/" target="_blank">https://www.okutamas.co.jp/moegi/</a></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 移動 -->
-  <div class="tl-row">
-    <div class="transit-dot"><div class="transit-line"></div><div class="transit-icon">🚃</div><div class="transit-line"></div></div>
-    <div class="transit-body">
-      <div class="transit-pill">もえぎの湯 → 奥多摩駅 徒歩<span class="dur">10分</span> → 御茶ノ水 電車<span class="dur">約1時間40分</span></div>
-    </div>
-  </div>
-
-  <!-- 19:20 着 -->
-  <div class="tl-row">
-    <div class="stop-dot"><div class="time">19:20</div><div class="dot dot-b">🏠</div></div>
-    <div class="stop-body">
-      <div class="stop-card col-b">
-        <div class="card-head">
-          <div class="card-title">御茶ノ水 着</div>
-          <div class="time-range tr-b">19:20頃</div>
-        </div>
-        <div class="card-body">
-          <div class="card-desc">17:30頃にもえぎの湯を出発。奥多摩駅から青梅線・中央線快速で御茶ノ水へ。約1時間40分。</div>
-          <div class="tags">
-            <span class="tag tag-b">青梅線→中央線快速</span>
-            <span class="tag tag-g">IC 約1,144円</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /tl -->
-</div><!-- /wrap -->
+</div>
 </div><!-- /plan-b -->
 
 
-<!-- ── URL Summary ────────────────────────────────────────────── -->
-<div style="background:var(--ink);color:rgba(255,255,255,.85);padding:40px 0 48px;margin-top:8px">
-  <div class="wrap">
-    <p style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--g);margin-bottom:10px;font-weight:500">References</p>
-    <h2 style="font-family:var(--fnt-serif);font-size:22px;font-weight:700;margin-bottom:4px">参照URL・出典一覧</h2>
-    <p style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:28px">出発前に公式サイトで最新情報を必ずご確認ください</p>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px">
-
+<!-- ── FOOTER / URL一覧 ── -->
+<div class="footer">
+  <div class="footer-in">
+    <div class="f-eyebrow">References</div>
+    <div class="f-title">参照URL・出典一覧</div>
+    <div class="f-sub">出発前に公式サイトで最新情報を必ずご確認ください</div>
+    <div class="f-grid">
       <div>
-        <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:12px">交通</p>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">JR東日本 時刻表</p>
-            <a href="https://www.jreast-timetable.jp/" target="_blank" style="font-size:10px;color:var(--g)">https://www.jreast-timetable.jp/</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">ホリデー快速おくたま（JR東日本）</p>
-            <a href="https://www.jreast.co.jp/railway/holiday/holiday_rapid.html" target="_blank" style="font-size:10px;color:var(--g)">https://www.jreast.co.jp/railway/holiday/holiday_rapid.html</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">西東京バス 公式時刻表</p>
-            <a href="https://www.nisitokyobus.co.jp/rosen/pocket.html" target="_blank" style="font-size:10px;color:var(--g)">https://www.nisitokyobus.co.jp/rosen/pocket.html</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">バスナビ.com 奥21系統（往路）奥多摩→東日原</p>
-            <a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042103&course=0000430702&stopNo=1" target="_blank" style="font-size:10px;color:var(--g);word-break:break-all">http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042103&course=0000430702&stopNo=1</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">バスナビ.com 奥21系統（復路）東日原→奥多摩</p>
-            <a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042550&course=0000430701&stopNo=1" target="_blank" style="font-size:10px;color:var(--g);word-break:break-all">http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042550&course=0000430701&stopNo=1</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">バスナビ.com 奥多摩湖方面（Plan B）</p>
-            <a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042103&course=0000430102&stopNo=1" target="_blank" style="font-size:10px;color:var(--g);word-break:break-all">http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042103&course=0000430102&stopNo=1</a>
-          </div>
+        <div class="f-sec-title">交通</div>
+        <div class="f-entries">
+          <div class="f-entry"><p>JR東日本 時刻表</p><a href="https://www.jreast-timetable.jp/" target="_blank">https://www.jreast-timetable.jp/</a></div>
+          <div class="f-entry"><p>川井駅 時刻表（JR東日本）</p><a href="https://www.jreast-timetable.jp/timetable/list0519.html" target="_blank">https://www.jreast-timetable.jp/timetable/list0519.html</a></div>
+          <div class="f-entry"><p>古里駅 時刻表（奥多摩方面・駅探）</p><a href="https://ekitan.com/timetable/railway/line-station/169-21/d2" target="_blank">https://ekitan.com/timetable/railway/line-station/169-21/d2</a></div>
+          <div class="f-entry"><p>西東京バス 公式時刻表</p><a href="https://www.nisitokyobus.co.jp/rosen/pocket.html" target="_blank">https://www.nisitokyobus.co.jp/rosen/pocket.html</a></div>
+          <div class="f-entry"><p>バスナビ.com 奥21系統（往路）奥多摩→東日原</p><a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042103&course=0000430702&stopNo=1" target="_blank">http://transfer.navitime.biz/…奥多摩駅→東日原</a></div>
+          <div class="f-entry"><p>バスナビ.com 奥21系統（復路）東日原→奥多摩</p><a href="http://transfer.navitime.biz/bus-navi/pc/diagram/BusDiagram?orvCode=00042550&course=0000430701&stopNo=1" target="_blank">http://transfer.navitime.biz/…東日原→奥多摩駅</a></div>
         </div>
       </div>
-
       <div>
-        <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:12px">観光スポット</p>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">鳩ノ巣渓谷（奥多摩町観光）</p>
-            <a href="https://www.town.okutama.tokyo.jp/kanko/001.html" target="_blank" style="font-size:10px;color:var(--g)">https://www.town.okutama.tokyo.jp/kanko/001.html</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">鳩ノ巣渓谷（東京とりっぷ）</p>
-            <a href="https://tokyotrip.net/column/hatonosu/" target="_blank" style="font-size:10px;color:var(--g)">https://tokyotrip.net/column/hatonosu/</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">奥多摩湖・麦山浮橋（奥多摩観光協会）</p>
-            <a href="https://www.okutama.gr.jp/site/sightseeing/" target="_blank" style="font-size:10px;color:var(--g)">https://www.okutama.gr.jp/site/sightseeing/</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">奥多摩水と緑のふれあい館</p>
-            <a href="https://www.okutamas.co.jp/" target="_blank" style="font-size:10px;color:var(--g)">https://www.okutamas.co.jp/</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">日原鍾乳洞 公式</p>
-            <a href="http://www.nippara.com/" target="_blank" style="font-size:10px;color:var(--g)">http://www.nippara.com/</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">日原鍾乳洞 詳細（YAMA HACK）</p>
-            <a href="https://yamahack.com/111" target="_blank" style="font-size:10px;color:var(--g)">https://yamahack.com/111</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">VERTERE TAPROOM 公式</p>
-            <a href="https://vertere.jp" target="_blank" style="font-size:10px;color:var(--g)">https://vertere.jp</a>
-          </div>
-          <div style="background:rgba(255,255,255,.05);border-radius:6px;padding:8px 12px">
-            <p style="font-size:11px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:2px">もえぎの湯 公式</p>
-            <a href="https://www.okutamas.co.jp/moegi/" target="_blank" style="font-size:10px;color:var(--g)">https://www.okutamas.co.jp/moegi/</a>
-          </div>
+        <div class="f-sec-title">グルメ・観光・温泉</div>
+        <div class="f-entries">
+          <div class="f-entry"><p>釜めし なかい 公式</p><a href="https://otaba-nakai.com/" target="_blank">https://otaba-nakai.com/</a></div>
+          <div class="f-entry"><p>釜めし なかい（食べログ）</p><a href="https://tabelog.com/tokyo/A1330/A133004/13046090/" target="_blank">https://tabelog.com/tokyo/A1330/A133004/13046090/</a></div>
+          <div class="f-entry"><p>そば・うどん 丹三郎（食べログ）</p><a href="https://tabelog.com/tokyo/A1330/A133004/13016476/" target="_blank">https://tabelog.com/tokyo/A1330/A133004/13016476/</a></div>
+          <div class="f-entry"><p>丹三郎（奥多摩観光協会）</p><a href="https://okutama-k.jimdofree.com/%E9%A3%9F%E4%BA%8B/%E3%81%9D%E3%81%B0-%E3%81%86%E3%81%A9%E3%82%93-%E4%B8%B9%E4%B8%89%E9%83%8E/" target="_blank">奥多摩観光協会 丹三郎紹介ページ</a></div>
+          <div class="f-entry"><p>日原鍾乳洞 公式</p><a href="http://www.nippara.com/" target="_blank">http://www.nippara.com/</a></div>
+          <div class="f-entry"><p>日原鍾乳洞（YAMA HACK 詳細）</p><a href="https://yamahack.com/111" target="_blank">https://yamahack.com/111</a></div>
+          <div class="f-entry"><p>奥多摩温泉 もえぎの湯 公式</p><a href="https://www.okutamas.co.jp/moegi/" target="_blank">https://www.okutamas.co.jp/moegi/</a></div>
         </div>
       </div>
-
     </div>
-
-    <div style="margin-top:24px;background:rgba(26,158,114,.12);border:1px solid rgba(26,158,114,.25);border-radius:8px;padding:14px 18px;font-size:12px;color:rgba(255,255,255,.6);line-height:1.7">
+    <div class="f-note">
       ⚠ バス時刻はダイヤ改正で変更になる場合があります。出発前に必ず西東京バス公式サイトで最新情報をご確認ください。<br>
-      バス時刻データ出典：バスナビ.com（西東京バス）2026年4月21日現在
+      バス時刻データ出典：バスナビ.com（西東京バス）2026年4月21日現在　／　丹三郎：売切れ次第終了のため早めの到着を推奨
     </div>
   </div>
 </div>
 
 <script>
-function switchPlan(p){
-  document.querySelectorAll('.plan-section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.plan-tab').forEach(t=>{t.classList.remove('active-a','active-b')});
-  document.getElementById('plan-'+p).classList.add('active');
-  const tabs=document.querySelectorAll('.plan-tab');
-  tabs[p==='a'?0:1].classList.add('active-'+p);
+function sw(p){
+  document.querySelectorAll('.plan').forEach(s=>s.classList.remove('show'));
+  document.getElementById('plan-'+p).classList.add('show');
+  ['a','b'].forEach(x=>{
+    const t=document.getElementById('tab-'+x);
+    t.classList.remove('on-a','on-b');
+  });
+  document.getElementById('tab-'+p).classList.add('on-'+p);
 }
 </script>
 </body>
